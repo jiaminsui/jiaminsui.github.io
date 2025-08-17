@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>JSONL vs JSONLINES — What’s the Difference?</title>
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --panel: #121821;
+      --text: #e6eef8;
+      --muted: #aab6c5;
+      --accent: #79c0ff;
+      --green: #3fb950;
+      --border: #1e2633;
+      --code-bg: #0e141b;
+    }
+    *{box-sizing:border-box;}
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji","Segoe UI Emoji";
+      background: linear-gradient(180deg, var(--bg), #0d131b 60%, #0b1017);
+      color: var(--text);
+      line-height: 1.6;
+    }
+    .container {
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 0 20px 56px;
+    }
+    header {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+    h1 {
+      margin: 0;
+      font-weight: 750;
+      letter-spacing: 0.2px;
+      font-size: clamp(28px, 5vw, 40px);
+      line-height: 1.15;
+      background: linear-gradient(90deg, #d7e3f4, #9ecaf6 60%, #8ed0ff);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+    .subtitle { color: var(--muted); font-size: 1.05rem; }
+    section {
+      background: rgba(255,255,255,0.02);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 18px 18px 8px;
+      margin: 16px 0 22px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+    h2 {
+      margin: 8px 0 8px;
+      font-size: 1.25rem;
+      color: #caeaff;
+    }
+    p { margin: 8px 0 12px; }
+    ul { margin: 8px 0 12px 1.2rem; }
+    li { margin: 4px 0; }
+    code, pre, kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, "Liberation Mono", monospace;
+      font-size: 0.95rem;
+    }
+    pre {
+      background: var(--code-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px 16px;
+      overflow: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 8px 0 6px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--panel);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.03);
+    }
+    thead th {
+      text-align: left;
+      font-weight: 700;
+      background: #0f1620;
+      border-bottom: 1px solid var(--border);
+      padding: 12px 14px;
+    }
+    tbody td {
+      border-top: 1px solid var(--border);
+      padding: 12px 14px;
+      vertical-align: top;
+    }
+    tbody tr:first-child td { border-top: none; }
+    .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      border: 1px solid var(--border);
+      background: #0d1420;
+      color: var(--accent);
+      margin-right: 6px;
+    }
+    .good { color: var(--green); }
+    .callout {
+      border-left: 3px solid var(--accent);
+      padding: 10px 12px;
+      background: rgba(121,192,255,0.08);
+      border-radius: 8px;
+      margin: 10px 0 2px;
+    }
+    footer {
+      margin-top: 24px;
+      color: var(--muted);
+      font-size: 0.9rem;
+    }
+    .small { font-size: 0.95rem; color: var(--muted); }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>JSONL vs JSONLINES — What’s the Difference?</h1>
+      <div class="subtitle">Short answer: they’re the <strong>same format</strong>; the extension differs by convention.</div>
+    </header>
+
+    <section>
+      <h2>What the format is</h2>
+      <p><span class="pill">JSON Lines</span> (often abbreviated as <em>JSONL</em>) stores <strong>one valid JSON object per line</strong>. It’s great for logs, streaming, and large datasets because you can process records line-by-line without loading the whole file.</p>
+      <pre><code>{&quot;name&quot;: &quot;Alice&quot;, &quot;age&quot;: 30}
+{&quot;name&quot;: &quot;Bob&quot;, &quot;age&quot;: 25}
+{&quot;name&quot;: &quot;Charlie&quot;, &quot;age&quot;: 40}</code></pre>
+    </section>
+
+    <section>
+      <h2>The extensions</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Extension</th>
+            <th>Usage in the wild</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><code>.jsonl</code></td>
+            <td>Most common in DS/ML, NLP, logging pipelines</td>
+            <td>Widely recognized by tooling (e.g., many datasets &amp; fine-tuning workflows)</td>
+          </tr>
+          <tr>
+            <td><code>.jsonlines</code></td>
+            <td>Less common but valid</td>
+            <td>Name comes from the “JSON Lines” spec site; same semantics as <code>.jsonl</code></td>
+          </tr>
+        </tbody>
+      </table>
+      <div class="callout"><strong>Bottom line:</strong> There is <span class="good">no functional difference</span>—both represent JSON Lines files. Choose the extension your team or tools expect (typically <code>.jsonl</code>).</div>
+    </section>
+
+    <section>
+      <h2>Why it’s useful</h2>
+      <ul>
+        <li>Stream-friendly: read/write a line at a time</li>
+        <li>Works well with Unix tools like <code>head</code>, <code>tail</code>, <code>wc</code>, <code>jq</code></li>
+        <li>Easy to append new records</li>
+      </ul>
+      <p class="small">Tip: Separate records with newlines. Don’t wrap the whole file in <code>[ ... ]</code> like standard JSON arrays.</p>
+    </section>
+
+    <footer>
+      <p>Made for a quick reference. If you’d like, ask for a version that includes sample read/write code in Python, Node, or shell.</p>
+    </footer>
+  </div>
+</body>
+</html>
