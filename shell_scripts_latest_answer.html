@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Shell Script File Extensions: .sh vs .bash</title>
+  <style>
+    :root {
+      --bg: #0b0f14;
+      --panel: #0f1620;
+      --text: #e6edf3;
+      --muted: #9fb1c1;
+      --accent: #7cc4ff;
+      --border: #243447;
+      --codebg: #0b1320;
+    }
+    * { box-sizing: border-box; }
+    html, body { margin: 0; padding: 0; }
+    body {
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      background: linear-gradient(180deg, #0b0f14 0%, #0e141b 100%);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    .container {
+      max-width: 900px;
+      margin: 48px auto;
+      padding: 0 20px;
+    }
+    .card {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 28px;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+    }
+    h1 {
+      margin: 0 0 8px 0;
+      font-size: 32px;
+      letter-spacing: 0.3px;
+    }
+    .subtitle {
+      margin-top: 0;
+      margin-bottom: 24px;
+      color: var(--muted);
+      font-size: 15px;
+    }
+    h2 {
+      margin-top: 26px;
+      font-size: 22px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 8px;
+    }
+    p { margin: 12px 0; }
+    ul { padding-left: 22px; }
+    code, pre, kbd {
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      font-size: 0.95em;
+    }
+    pre {
+      background: var(--codebg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 14px;
+      overflow-x: auto;
+    }
+    .note {
+      color: var(--muted);
+      font-style: italic;
+      margin-top: 18px;
+    }
+    .table-wrap {
+      overflow-x: auto;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    th {
+      background: #112030;
+      color: var(--accent);
+      font-weight: 600;
+      letter-spacing: 0.2px;
+    }
+    tr:last-child td { border-bottom: none; }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      font-size: 12px;
+      color: var(--muted);
+      background: rgba(124,196,255,0.05);
+      margin-right: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="card">
+      <h1>Shell Script File Extensions: <code>.sh</code> vs <code>.bash</code></h1>
+      <p class="subtitle">Both <code>.sh</code> and <code>.bash</code> files are shell scripts, i.e., programs written for a command-line shell.</p>
+
+      <div>
+        <span class="tag">Shell</span>
+        <span class="tag">POSIX</span>
+        <span class="tag">Bash</span>
+        <span class="tag">Scripting</span>
+      </div>
+
+      <h2><code>.sh</code> files</h2>
+      <ul>
+        <li>Usually contain <strong>POSIX-compliant</strong> shell script.</li>
+        <li>Can be run in <em>any POSIX shell</em> (e.g., <code>sh</code>, <code>bash</code>, <code>dash</code>, <code>ksh</code>, <code>zsh</code>).</li>
+        <li>More <strong>portable</strong> across Unix-like systems.</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code>#!/bin/sh
+echo "Hello from a POSIX shell script!"</code></pre>
+
+      <h2><code>.bash</code> files</h2>
+      <ul>
+        <li>Specifically contain <strong>Bash</strong> scripts (Bourne Again SHell).</li>
+        <li>May use Bash-only features (arrays, extended globbing, <code>[[ ]]</code> tests, etc.).</li>
+        <li>Should be run with <code>bash</code> explicitly.</li>
+      </ul>
+      <p>Example:</p>
+      <pre><code>#!/bin/bash
+for i in {1..5}; do
+    echo "Hello from Bash: $i"
+done</code></pre>
+
+      <h2>Main difference</h2>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr>
+              <th>Aspect</th>
+              <th><code>.sh</code></th>
+              <th><code>.bash</code></th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Language</td>
+              <td>POSIX shell (portable)</td>
+              <td>Bash-specific (may not work in <code>sh</code>)</td>
+            </tr>
+            <tr>
+              <td>Portability</td>
+              <td>High</td>
+              <td>Lower (requires Bash)</td>
+            </tr>
+            <tr>
+              <td>Typical Shebang</td>
+              <td><code>#!/bin/sh</code></td>
+              <td><code>#!/bin/bash</code></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h2>In practice</h2>
+      <ul>
+        <li>Use <code>.sh</code> for maximum compatibility.</li>
+        <li>Use <code>.bash</code> when you need Bash-specific features.</li>
+      </ul>
+
+      <p class="note">Want to see how to check which shell a script is actually using on your system?</p>
+    </div>
+  </div>
+</body>
+</html>
